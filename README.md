@@ -1,4 +1,4 @@
-# cross - 美诺福业务管理系统
+# Cross - 美诺福业务管理系统
 
 ## 基础资料
 
@@ -40,6 +40,20 @@
   
 * 设备检修标准
 
+* 维保技术服务站
+  - 名称 - 必需，维保技术服务站名称，唯一
+  - 缩写 - 可选
+  - 站长 - 
+  - 服务公司 - 服务公司名称
+  - Logo
+  - 创建人
+  - 创建日期
+  - 更新日志
+    - 操作人
+    - 更新日期
+    - 操作
+  
+
 * 巡检
   - 期间 - 巡检开始和完成时间
     - 开始时间
@@ -58,69 +72,124 @@
 * 维修站长
 * 维修工程师
 
-## 需求
+
+### 用户
+
+用户是一个特定的系统使用者（可以是人或设备、软件系统等），具有一个面向系统整体的统一身份。一个用户可以跨子系统拥有多个账号，每一个用户账号都对应于一个特定子系统的特定的业务角色（拥有一组相应的业务职责权限），该用户无论拥有多少账号，其统一身份是唯一的，统一身份的唯一标识由系统自动产生。
+
+系统启用HR后，统一身份可以同一个员工相关联，以便对员工进行整体工作评估。
+
+#### 注册用户账号
+
+注册新的用户账号时，用户向系统提供以下信息：
+
+* 推荐人 - 可选项，账号注册完成后，推荐人负责审核并为其分配业务角色
+* 用户账号 - 必需且唯一，账号登录标识
+* 姓名
+* 密码 - 6位以上数字和字母组合，不能是纯数字
+* 员工编号 - 使统一身份同员工相关联
+* 手机
+* 头像
+* 邮箱
+
+系统创建用户账号成功后，用户可以该账号登录，如果有推荐人，系统将通知该推荐人用户账号注册成功。
+
+如果用户是在已有账号下注册新的用户账号，则系统将已有账号同新建账号通过统一身份相互关联。
+
+用户可以在已有账号下随时修改当前账号信息，包括姓名、密码、手机、邮箱、头像等。如果当前账号为游客（未分配任何业务角色），则用户可以注销当前账号。
+
 
 ### 系统管理员
 
-系统管理员用于分配各子系统主管权限（子系统其它业务角色均由该子系统业务主管指定），而并不涉及具体的业务操作。其中，缺省系统管理员为系统预设的系统管理员，用于系统实际启用后指定首位系统管理员，一旦有系统管理员被指定，该缺省系统管理员将自动失效，系统将保持至少一位系统管理员。
+系统管理员用于分配各子系统主管权限（子系统其它业务角色均由该子系统业务主管指定），而并不涉及任何具体的业务操作。其中，缺省系统管理员为系统预设的系统管理员，用于系统实际启用后指定首位系统管理员，一旦有系统管理员被指定，该缺省系统管理员将自动失效，系统将保持至少一位系统管理员。
 
+#### 指定首位维修技术部经理
 
- - 指定首位维修技术部经理
-
-系统初始状态下有一个缺省系统管理员，用于指定一个用户为首位维修技术部经理。一旦指定维修技术部经理：
-
-* 缺省系统管理员账号失效；
-* 维修技术部经理可以指定其他用户为维修技术部经理；
-* 维修技术部经理可以收回其他（不包括自己）维修技术部经理权限；
-
-
-### 用户 - 新用户注册
-
-新用户在被许可进入系统前需自行注册账号，内容主要包括：
-
-* 用户账号 - 必需且唯一，角色登录标识
-* 姓名
-* 密码 - 6位以上数字和字母组合，不能是纯数字
-* 手机
-* 头像
-* 邮箱
-
-新用户完成注册后即可登录系统
-
-### 维修技术部经理 - 新建维保技术服务站
-
-随着公司业务的发展，新设维保技术服务站时，维修技术部经理向系统提供新建维保技术服务站的基本信息，内容主要包括：
-
-名称 - 维保技术服务站名称
-编码 - 可选，唯一
-服务公司 - 服务公司名称
-Logo
-
-建立维保技术服务站后，维修技术部经理即可指定一新注册用户为该维保技术服务站长。
-
-### 用户 - 新用户注册
-
-新用户在被许可进入系统前需自行注册，内容主要包括：
-
-* 用户名 - 必需且唯一，用户账号及登录标识
-* 姓名
-* 密码 - 6位以上数字和字母组合，不能是纯数字
-* 手机
-* 头像
-* 邮箱
-
-新用户完成注册后即可登录系统
+缺省系统管理员可以指定一个尚未分配业务角色的用户账户为首位维修技术部经理，指定维修技术部经理后，缺省系统管理员账号失效。
 
 
 
+## 业务概要
+
+**维保技术服务系统**从总体上致力于为客户提供细致、稳定、及时的仪器设备维护、保障及维修服务，在业务不断成长的同时努力降低营运成本、保障安全、提高整体效率。
+
+### **维修技术部经理**
+**维修技术部经理**是维保技术服务系统的业务主管（或区域业务分管），其主要业务职责包括：
+
+* 指定其他维修技术部经理，或回收其他（不包括自己）维修技术部经理权限
+* 维护所有维保技术服务站基础资料
+* 指定维保技术服务站站长，或回收站长权限
+* 分配或回收专业组组长角色权限
+
+维修技术部经理可以创建新的维保技术服务站，创建时向系统提供所建服务站的基本信息，主要包括：
+
+* 名称 - 必需，维保技术服务站名称，唯一
+* 缩写 - 可选
+* 站长 - 
+
+维修技术部经理可以随时修改维保技术服务站名称、缩写等基本信息，指定新的站长，或回收原站长权限。
+
+维修技术部经理可以指定一个或多个专业组长，或回收专业组长的业务权限。
+
+### **专业组**
+
+专业组负责提供专业技术信息，包括仪器设备技术规格、维保标准、维修技术指导、技术培训等。专业组分为专业组长、专业工程师两组业务角色，专业组长除含盖专业工程师的职责外，还具有技术审核的职责。
+
+为了便于设备管理，统一各种设备的厂商信息，专业组需负责向系统提供并维护所有设备所涉及的生产厂商信息，内容包括：
+
+  * 编号 - 可选，任何便于标识的统一编码
+  * 名称 - 生产厂商名称
+  
+专业组成员负责向系统提供所有预设设备类型，主要内容包括：
+  * 名称 - 设备类型名称
+  * 巡检周期 - 每年巡检次数，缺省值为每周一次 
+  * 巡检工时 - 每次巡检所占工时 
+  * 点检周期 - 每年点检次数，缺省值为每月一次
+  * 点检工时 - 每次点检所占工时
+  * 维护周期 - 每年维护保养次数，缺省值为每年2次
+  * 维护工时 - 每次维护所占工时
+  * 维修周期 - 每年维修次数，缺省值为每年2次
+  * 维修工时 - 每次维修所占工时
+  
+
+专业组成员负责向系统提供所有仪器设备基本信息、检测标准、点巡检周期、以及相关技术资料，包括：
+
+  * 编号 - 可选，任何便于标识的统一编码
+  * 名称 - 
+  * 型号 - 设备厂商所给定的型号编码
+  * 厂商 - 生产厂商，缺省为美诺福
+  * 类型 - 设备类型
+  * 等级 -
+  * 检测标准
+    * 项目 - 检测项目或检测部位表述
+    * 标准 - 检测指标及其标准值或范围
+    * 说明
+  * 巡检周期 - 每年巡检次数，缺省值为设备类型中所设定的巡检周期（每周一次） 
+  * 巡检工时 - 每次巡检所占工时，缺省值为设备类型中所设定的巡检工时 
+  * 点检周期 - 每年点检次数，缺省值为设备类型中所设定的点检周期（每月一次）
+  * 点检工时 - 每次点检所占工时，缺省值为设备类型中所设定的点检工时
+  * 维护周期 - 每年维护保养次数，缺省值为设备类型中所设定的维护周期（每年2次）
+  * 维护工时 - 每次维护所占工时，缺省值为设备类型中所设定的维护工时
+  * 维修周期 - 每年维修次数，缺省值为设备类型中所设定的维修周期（每年2次）
+  * 维修工时 - 每次维修所占工时，缺省值为设备类型中所设定的维修工时
+  * 技术资料
+    * 标题
+    * 文档 - 任何可以上载的文档、多媒体文件等
+    * 提供者
+  * 标签 -
+  * 图片 -
+  * 备注 -
 
 
+### **站长**
+系统将为站长产生巡检和点检计划：巡检每周一次，点检每月一次，每年两次维护，每年两次维修。
 
 ## 问题
 * 在巡检时如果某个检测部位未达检测标准，这时检测人员作什么操作？
 * 点巡检记录审核是何含义？ 是否需要专门审核？有审核不通过的情况？
 * 安装地点同作业区有何区别？区分作业区和安装地点有何作用？
-* 多个甲方单位拥有同种设备的情况是否普遍？同种设备应具有相同的巡检和点检标准是吗？
+* 多个甲方单位拥有同种设备的情况是否普遍？同种设备是否具有相同的巡检和点检标准？
+* 除了点检周期，点检计划的产生依据还有哪些？
 
 ## 系统安装
 假设安装目录为: /home/jsmtest/apps
@@ -173,189 +242,3 @@ docker images purge
 脚本文件：/home/mongo/dailybackup.sh
 
 shudo crontab -e
-
-## 开发文档
-
-处理消息时，如果返回：
-* Promise.resolve(true) - 接收消息
-* Promise.resolve(false) - 拒绝消息，重新进入消息列表
-* Promise.reject(err) - 拒绝消息，消息将被废弃
-
-### REST服务
-
-#### PoTransactions - 采购单交易集合
-
-采购单交易集合资源提供采购单交易查询和交易执行服务
-
-##### 采购单交易查询服务
-
-采购单交易查询服务实现为标准Finelets REST查询服务。
-* 参数
-  * id -- 采购单标识
-* 返回 -- 采购单交易资源（PoTransaction）数据集合。
-
-##### 执行采购单业务交易
-执行采购单业务交易实现为标准Finelets Create REST服务。
-* 参数
-  * id -- Uri param，采购单标识
-  * type -- Uri query，业务交易类型，有效交易类型包括：
-    * commit -- 提交审批
-    * review -- 审核
-    * inv -- 入库
-* 交易数据（request body）
-  * __v -- 采购单版本号
-  * actor -- 当前业务交易执行者标识，例如，如果当前交易为入库，则actor为库管人员
-  * date -- 交易日期
-  * data -- 交易相关信息
-  * remark -- 交易备注
-* 返回结果
-  * 201 -- 交易成功，并返回采购入库交易资源
-  * 400 -- 交易参数错误，如单号不存在、无交易数据等
-  * 500 -- 交易失败
-   
-###### 采购入库
-采购入库是对处于“执行”状态的采购单相关采购到货进行入库，其结果包括：
-* 记录采购入库单
-* 更新库存量 -- 库存量 = 当前库存量 + 入库量
-* 更新在单量 -- 在单量 = 当前在单量 - 入库量
-
-采购入库的交易相关信息包括：
-* qty -- 入库数量，required
-* loc -- 库位
-* refNo -- 参考单号
-  
-业务规则包括：
-
-* 交易数据合法
-  * 由id指定的采购单必须存在
-  * 当前采购单版本号必须与交易数据中__v给出的版本号一致
-  * 当前采购单必须处于“执行/open”状态
-  * 必须指定入库交易者，且入库交易者必须存在
-  * 如未指定入库日期，则取数据库当前日期
-  * 必须指定非0的入库数量，入库数量可以为负， 以应用于入库数量对冲 
-
-采购入库交易返回采购入库单资源：
-* type -- ‘inv’，为采购单交易类型
-* id -- 采购单交易标识
-* parent -- 采购单标识
-* actor -- 交易者标识
-* date -- 交易日期
-* data -- 入库信息
-  * qty -- 数量
-  * loc -- 库位
-  * refNo -- 参考单号
-* remark -- 交易备注
-  
-
-## 业务规则
-
-### 采购单业务交易
-
-
-
-### 采购交易导入
-采购交易可以通过CSV文件导入，格式为：
-* 首行为字段名称
-* 字段
-  * 交易编号
-  * 品名
-  * 料品类型 - 低值易耗品/资产/料品（采购/委外）
-  * 规格
-  * 单位
-  * 供应商类型 - 实体店/电商/厂家
-  * 供应商名称
-  * 供应商链接
-  * 采购周期
-  * 采购单价
-  * 数量
-  * 金额
-  * 申请人
-  * 申请日期
-  * 审核人
-  * 审核日期
-  * 采购日期
-  * 采购人
-  * 到货日期
-  * 领用人
-  * 领用日期
-  * 领用项目
-  * 领用数量
-  * 货位
-
-```
-交易编号,料品类型,品名,规格,单位,数量,采购单价,金额,供应商名称,供应商类型,参考单号,供应商链接,采购周期,申请人,申请日期,审核人,审核日期,采购日期,采购人,到货日期,领用人,领用日期,领用数量,领用项目,货位,备注
-
-transNo,partType,partName,spec,unit,qty,price,amount,supplier,supply,refNo,supplyLink,purPeriod,applier,appDate,reviewer,reviewDate,purDate,purchaser,invDate,user,useDate,useQty,project,invLoc,remark
-
-const expected = {
-						transNo: 'xulei00001',
-						partType: '物料',
-						partName: 'JSM-A1实验用格子布',
-						spec: 'abcd',
-						unit: '米',
-						qty: 150,
-						price: 8800,
-						amount: 8800,
-						supplier: '绍兴惟楚纺织品有限公司',
-						supply: '厂商',
-						refNo: 'JSMCONV20181109A',
-						supplyLink: '开票中',
-						purPeriod: 80,
-						applier: '徐存辉',
-						appDate: new Date('2018/11/9').toJSON(),
-						reviewer: '徐存辉',
-						reviewDate: new Date('2018/11/9').toJSON(),
-						purchaser: '徐存辉',
-						purDate: new Date('2018/11/9').toJSON(),
-						invDate: new Date('2018/12/12').toJSON(),
-						user: '测试组',
-						useDate: new Date('2018/12/12').toJSON(),
-						useQty: 100,
-						project: '测试组',
-						invLoc: ' h234',
-						remark: 'remark'
-					}
-
-```
-
-## MQ
-Consumers receive messages from a particular queue in one of two ways:
-* By subscribing to it via the basic.consume AMQP command. This will place the channel being used into a receive mode until unsubscribed from the queue.
-* Requesting a single message from the queue is done by using the basic.get AMQP command. This will cause the consumer to receive the next message in the queue and then not receive further messages until the next basic.get. You shouldn’t use basic.get in a loop as an alternative to
-basic.consume, because it’s much more intensive on Rabbit.
-
-When a Rabbit queue has multiple consumers, messages received by the queue are served in a round-robin fashion to the consumers.
-
-Every message that’s received by a consumer is required to be acknowledged. Either the consumer must explicitly send an acknowledgement to RabbitMQ using the basic.ack AMQP command,
-or it can set the auto_ack parameter to true when it subscribes to the queue.
-
-If a consumer receives a message and then disconnects from Rabbit (or unsubscribes
-from the queue) before acknowledging, RabbitMQ will consider the message
-undelivered and redeliver it to the next subscribed consumer.
-
-Both consumers and producers can create queues by using the queue.declare
-AMQP command. But consumers can’t declare a queue while subscribed to another
-one on the same channel.
-
-Here are some other useful properties you can set for the queue:
-* exclusive—When set to true, your queue becomes private and can only be
-consumed by your app. This is useful when you need to limit a queue to only
-one consumer.
-* auto-delete—The queue is automatically deleted when the last consumer
-unsubscribes. If you need a temporary queue used only by one consumer, combine
-auto-delete with exclusive. When the consumer disconnects, the queue
-will be removed.
-
-With passive set to true, queue.declare will return successfully if the queue exists, and return an error without
-creating the queue if it doesn’t exist.
-
-A queue is said to be bound to an exchange by a routing key.
-
-There are four kinds of exchanger:
-* direct - if the routing key matches, then the message is delivered to the corresponding queue.
-  * 利用缺省Exchange, 通过: `$channel->basic_publish($msg, '', 'queue-name');`可以向特定的队列发送消息
-  * 可以实现将向多个队列发送消息
-* fanout - when you send a message to a fanout
-exchange, it’ll be delivered to all the queues attached to this exchange.
-* topic - 可以实现将多种消息发送给多个队列
-* headers
