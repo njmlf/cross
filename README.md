@@ -1,78 +1,5 @@
 # Cross - 美诺福业务管理系统
 
-## 基础资料
-
-* 厂商 - 维保仪器设备的生产厂商
-  - 编号
-  - 名称
-
-* 客户
-  - 编号
-  - 名称
-  - 作业区
-    - 作业区名称
-  
-* 设备类型 - 维保仪器设备的特定分类
-  
-* 设备 - 维保服务所涉及的仪器设备的类型及其规格定义
-  
-  - 名称 - 
-  - 型号 - 设备厂商所给定的型号编码
-  - 厂商 - 生产厂商，缺省为美诺福
-  - 类型 - 设备类型
-  - 编号 - 可选，任何便于标识的统一编码
-  - 标签 
-  - 图片
-  - 备注
-  
-* 维保设备 - 由客户指定的需进行维保的仪器设备
-  - 所属公司（客户）
-  - 设备
-  - 设备序列号
-  - 作业区
-  - 安装地点
-  - 状态 - 草稿/启用/停用
-  - 负责人
-  - 权重（重要性）
-  - 标签 
-  - 图片
-  - 备注
-  
-* 设备检修标准
-
-* 维保技术服务站
-  - 名称 - 必需，维保技术服务站名称，唯一
-  - 缩写 - 可选
-  - 站长 - 
-  - 服务公司 - 服务公司名称
-  - Logo
-  - 创建人
-  - 创建日期
-  - 更新日志
-    - 操作人
-    - 更新日期
-    - 操作
-  
-
-* 巡检
-  - 期间 - 巡检开始和完成时间
-    - 开始时间
-    - 完成时间
-  - 设备 - 本次巡检的设备
-  - 检测明细
-    - 检测部位
-    - 检测值
-    - 是否通过检测
-  - 检测人
-  - 审核 ？
-  
-## 角色
-
-* 维修技术部经理
-* 维修站长
-* 维修工程师
-
-
 ## **基本概念**
 ### **用户**
 
@@ -272,54 +199,70 @@
 * 多个甲方单位拥有同种设备的情况是否普遍？同种设备是否具有相同的巡检和点检标准？
 * 除了点检周期，点检计划的产生依据还有哪些？
 
-## 系统安装
-假设安装目录为: /home/jsmtest/apps
 
-Clone cross：
+## **附录一**
 
-```
-git clone -b docker-deploy-test https://github.com/JSMetta/cross.git
-cd cross
-git pull origin dev
+* 厂商 - 维保仪器设备的生产厂商
+  - 编号
+  - 名称
 
-git clone -b vcross-1.0.1 https://github.com/JSMetta/VCross.git
-cd VCross
-git pull origin vcross-1.0.1
+* 客户
+  - 编号
+  - 名称
+  - 作业区
+    - 作业区名称
+  
+* 设备类型 - 维保仪器设备的特定分类
+  
+* 设备 - 维保服务所涉及的仪器设备的类型及其规格定义
+  
+  - 名称 - 
+  - 型号 - 设备厂商所给定的型号编码
+  - 厂商 - 生产厂商，缺省为美诺福
+  - 类型 - 设备类型
+  - 编号 - 可选，任何便于标识的统一编码
+  - 标签 
+  - 图片
+  - 备注
+  
+* 维保设备 - 由客户指定的需进行维保的仪器设备
+  - 所属公司（客户）
+  - 设备
+  - 设备序列号
+  - 作业区
+  - 安装地点
+  - 状态 - 草稿/启用/停用
+  - 负责人
+  - 权重（重要性）
+  - 标签 
+  - 图片
+  - 备注
+  
+* 设备检修标准
 
-cd ..
+* 维保技术服务站
+  - 名称 - 必需，维保技术服务站名称，唯一
+  - 缩写 - 可选
+  - 站长 - 
+  - 服务公司 - 服务公司名称
+  - Logo
+  - 创建人
+  - 创建日期
+  - 更新日志
+    - 操作人
+    - 更新日期
+    - 操作
+  
 
-docker-compose up --build -d
+* 巡检
+  - 期间 - 巡检开始和完成时间
+    - 开始时间
+    - 完成时间
+  - 设备 - 本次巡检的设备
+  - 检测明细
+    - 检测部位
+    - 检测值
+    - 是否通过检测
+  - 检测人
+  - 审核 ？
 
-```
-cross项目在/home/jsmtest/apps/cross中
-
-
-## 常用命令
-
-cd /home/jsmtest/apps/cross
-git pull origin docker-deploy-test
-docker build -t jsmetta/cross .
-docker run -d --name redis -p 6379:6379 redis
-
-docker run --name mongodb --restart unless-stopped -v /home/mongo/data:/data/db -v home/mongo/backups:/backups -d mongo --smallfiles
-
-docker run -d -p 8089:8080 --link redis:redis --name cross jsmetta/cross
-
-docker run -it --link mongodb:mongo --rm mongo mongo --host mongo test
-
-docker run -d --name nginx -p 80:80 --link cross:cross cross/nginx
-
-docker-compose up --build
-
-docker exec -it mongodb mongo
-
-#### Remove dangling images
-docker images -f dangling=true
-
-docker images purge
-
-#### 备份数据库
-
-脚本文件：/home/mongo/dailybackup.sh
-
-shudo crontab -e
